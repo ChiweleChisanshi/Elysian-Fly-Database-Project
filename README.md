@@ -24,6 +24,14 @@ The goal of this project was to design a database that could help Elysian Fly:
 - Reduce data redundancy
 - Improve data integrity
 
+## My Role
+As part of the Crimson & Cream team, I contributed to the database design and documentation process. I helped with requirements analysis, ERD planning, normalization, implementation review, SQL-based business analysis, and written documentation.
+
+## What I Learned
+
+This project helped me understand how database design supports business operations and decision-making. I learned how to move from business requirements to an ERD, then from an ERD to normalized relations, and finally to a physical database design.
+
+I also learned the importance of accurate documentation, consistent naming, data integrity, and careful SQL testing.
 ## Tools and Concepts Used
 
 - SQL
