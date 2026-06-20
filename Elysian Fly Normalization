@@ -1,0 +1,343 @@
+TVendor(VendorID, Vendor Name)  
+
+TProduct(ProductID, VendorID*, ProductName, Cost, PatternID, SizeID, ColorID) 
+
+Foreign Key VendorID references TVendor 
+
+Not Null 
+
+On Delete Restrict 
+
+Normalized Relations 
+
+ 
+
+TState(StateID, StateName)  
+
+TColor(ColorID, CName)  
+
+TSize(SizeID, SName) 
+
+TPattern(PatternID, PatternName, Description) 
+
+TAnnualCatalog(CatalogID, ACName)  
+
+TCustomerType(CustTypeID, CTName)  
+
+TEmployeeType(EmployeeTypeID, EmployeeTypeName, IsAccountReceivable(Y/N), IsAccountPayable(Y/N))  
+
+TPaymentMethodType(PaymentMethodTypeID, PaymentMethodName)  
+
+TShippingType(STID, STName) 
+
+TGuideSkill(GSID, GSName, KnownRoutes)  
+
+TSalesOrderChannel(SOCID,ChannelName 
+
+TDiscount(DiscountTypeID, DiscountDate, DiscountName, DiscountPercent)  
+
+TEmployee(EmpID, EmployeeTypeID*, IsGuide(Y/N), EFirstName, ELastName, EAddress, City, ZipCode, Phone)  
+
+Foreign Key EmplyeeTypeID references TEmployeeType   
+
+Not Null   
+
+On Delete Restrict  
+
+T<PurchaseOrderLine>(POLID, POID*, POLQuantity)  
+
+Foreign Key POID references TPurchaseOrder   
+
+Not Null   
+
+On Delete Restrict   
+
+TPaymentIn(PayInID, EmpID*, PIDate, Amount, PaymentMethodTypeID*)  
+
+Foreign Key EmpID references TEmployee 
+
+Not Null 
+
+On Delete Restrict 
+
+Foreign Key PaymentMethodID references TPaymentMethodType 
+
+Not Null 
+
+On Delete Restrict 
+
+T<SalesOrderLine>(SOLID, FlyID*, SOID*, Quantity, SOLStatus)  
+
+Foreign Key FlyID references TFly  
+
+Not Null 	  
+
+On Delete Restrict  
+
+  
+
+Foreign Key SOID references TSalesOrder  
+
+Not Null 	  
+
+On Delete Restrict 
+
+T<DIY>(DIYID, FlyID-Kit*, FlyID-Part*, Quantity)  
+
+ Foreign Key FlyID-Kit references TFly  
+
+Not Null   
+
+On Delete Restrict   
+
+ 
+
+Foreign Key FlyID-Part references TFly  
+
+Not Null   
+
+On Delete Restrict   
+
+TPaymentOut(PayOutID, PaymentMethodTypeID*, EmpID*, Invoice#, Amount, PODate)  
+
+Foreign Key PaymentMethodTypeID references TPaymentMethodType  
+
+Not Null  
+
+On Delete Restrict  
+
+TVendor(VendID, EmpID*, VName, VendorAccount#, Terms, Date, VStreet, VCity, StateID*, VZipCode, VPhone, ContactName)  
+
+Foreign Key FlyID references TFly  
+
+Not Null  
+
+On Delete Restrict   
+
+ 
+
+Foreign Key EmpID references TEmployee  
+
+Not Null   
+
+On Delete Restrict   
+
+  
+
+Foreign Key StateID references TState   
+
+Not Null  
+
+On Delete Restrict   
+
+ 
+
+Foreign Key EmpID references TEmployee  
+
+Not Null  
+
+On Delete Restrict  
+
+TDeliveryIn(DelIID, EmpID-Deliver*, EmpID-Inspect*, EmpID-Receive *, DIDate)  
+
+Foreign Key EmpID- Deliver references TEmployee  
+
+Not Null 	  
+
+On Delete Restrict  
+
+  
+
+Foreign Key EmpID-Inspect references TEmployee  
+
+Not Null 	 
+
+On Delete Restrict  
+
+  
+
+Foreign Key EmpID-Receive references TEmployee  
+
+Not Null 	  
+
+On Delete Restrict  
+
+TDeliveryOut(DelOID, STID*, EmpID-Pick*, EmpID-Pack*, EmpID-Ship*, TrackingNumber, ShipDate, Cost)  
+
+Foreign Key STID references TShippingType  
+
+Not Null 	  
+
+On Delete Restrict  
+
+  
+
+Foreign Key EmpID-Pick references TEmployee  
+
+Not Null 	  
+
+On Delete Restrict  
+
+  
+
+Foreign Key EmpID-Pack references TEmployee  
+
+Not Null  
+
+On Delete Restrict  
+
+  
+
+Foreign Key EmpID-Ship references TEmployee  
+
+Not Null  
+
+On Delete Restrict  
+
+TGuideFishingTrip(GFTID, SOID*, GSID*, EmpID*, MaxPartySize, GroupQuantity, TripTotal)  
+
+Foreign Key SOID references TSalesOrder  
+
+Not Null  
+
+On Delete Restrict  
+
+ 
+
+Foreign Key GSID references TGuideSkill  
+
+Not Null  
+
+On Delete Restrict  
+
+   
+
+Foreign Key EmpID references TEmployee  
+
+Not Null  
+
+On Delete Restrict  
+
+TSalesOrder(SOID, PayInID*, CustID*, EmpID*, DiscountTypeID*, SODate, Total)  
+
+Foreign Key PayInID references TPaymentIn   
+
+Not Null 	   
+
+On Delete Restrict   
+
+  
+
+ Foreign Key CustID references TCustomer   
+
+Not Null   
+
+On Delete Restrict   
+
+  
+
+Foreign Key EmpID references TEmployee   
+
+Not Null   
+
+On Delete Restrict   
+
+  
+
+Foreign Key DiscountTypeID references TDiscountType   
+
+Not Null   
+
+On Delete Restrict  
+
+TPurchaseOrder(POID, EmpID*, PayOutID*, VendID*, Date)  
+
+Foreign Key EmpID references TEmployee   
+
+Not Null   
+
+On Delete Restrict   
+
+  
+
+Foreign Key PayOutID references TPaymentOut   
+
+Not Null   
+
+On Delete Restrict   
+
+  
+
+Foreign Key VendID references TVendor   
+
+Not Null   
+
+On Delete Restrict   
+
+TCustomer(CustID, CustTypeID*, CatalogID*, StateID*, CFirstName, CLastName, CEmail, CAddress, CCity, ZipCode, CreditLimit, IsOpenInvoive(Y/N))   
+
+Foreign Key CustTypeID references TCustomerType  
+
+Not Null   
+
+On Delete Restrict   
+
+ 
+
+Foreign Key CatalogID references TAnnualCatalog  
+
+Not Null   
+
+On Delete Restrict   
+
+  
+
+Foreign Key StateID references TState   
+
+Not Null   
+
+On Delete Restrict  
+
+TOrderDetails(OrderID, CustID*, CFirstName, CLastName, GroupQuantity, PODate, Invoice#, TripTotal, FlySalePrice, Total, Status, DiscountPercent, PIDate)  
+
+Foreign Key CustID references TCustomer  
+
+Not Null  
+
+On Delete Restrict  
+
+TFly(FlyID, ColorID* VendID*, Name, SalePrice, Qty_OH, SizeID*, ReorderPoint, PatternID*, PurchaseCost)  
+
+ 
+
+Foreign Key ColorID references TColor  
+
+Not Null   
+
+On Delete Restrict  
+
+ 
+
+Foreign Key VendID references TVendor  
+
+Not Null  
+
+On Delete Restrict   
+
+ 
+
+Foreign Key SizeID references TSize   
+
+Not Null   
+
+On Delete Restrict   
+
+  
+
+Foreign Key PatternID references TPattern   
+
+Not Null   
+
+On Delete Restrict  
+
+ 
